@@ -32,6 +32,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceFabric.ECommerce.API\ServiceFabric.ECommerce.API.csproj" />
     <ProjectReference Include="..\ServiceFabric.ECommerce.ProductCatalog\ServiceFabric.ECommerce.ProductCatalog.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

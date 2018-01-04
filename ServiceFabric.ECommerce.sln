@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.ProductCatalog.Model", "ServiceFabric.ECommerce.ProductCatalog.Model\ServiceFabric.ECommerce.ProductCatalog.Model.csproj", "{8E0C61E2-8BF3-47B2-BE13-8F5CCF60401D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.API", "ServiceFabric.ECommerce.API\ServiceFabric.ECommerce.API.csproj", "{72F755A0-A410-4F3B-98A4-4909FA4D2402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,14 @@ Global
 		{8E0C61E2-8BF3-47B2-BE13-8F5CCF60401D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8E0C61E2-8BF3-47B2-BE13-8F5CCF60401D}.Release|x64.ActiveCfg = Release|Any CPU
 		{8E0C61E2-8BF3-47B2-BE13-8F5CCF60401D}.Release|x64.Build.0 = Release|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Debug|x64.Build.0 = Debug|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|x64.ActiveCfg = Release|Any CPU
+		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
