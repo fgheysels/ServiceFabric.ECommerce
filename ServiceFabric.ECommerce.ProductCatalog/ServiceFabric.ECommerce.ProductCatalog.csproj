@@ -85,12 +85,19 @@
     <Compile Include="ProductCatalog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ServiceEventSource.cs" />
+    <Compile Include="SfProductCatalogRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PackageRoot\Config\Settings.xml" />
     <None Include="PackageRoot\ServiceManifest.xml" />
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceFabric.ECommerce.ProductCatalog.Model\ServiceFabric.ECommerce.ProductCatalog.Model.csproj">
+      <Project>{8e0c61e2-8bf3-47b2-be13-8f5ccf60401d}</Project>
+      <Name>ServiceFabric.ECommerce.ProductCatalog.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

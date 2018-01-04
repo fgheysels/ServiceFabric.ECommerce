@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
+using ServiceFabric.ECommerce.ProductCatalog.Model;
 
 namespace ServiceFabric.ECommerce.ProductCatalog
 {
@@ -15,9 +16,13 @@ namespace ServiceFabric.ECommerce.ProductCatalog
     /// </summary>
     internal sealed class ProductCatalog : StatefulService
     {
+        private readonly IProductRepository _repository;
+
         public ProductCatalog(StatefulServiceContext context)
             : base(context)
-        { }
+        {
+            _repository = new SfProductCatalogRepository(this.StateManager);
+        }
 
         /// <summary>
         /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.
@@ -38,31 +43,29 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         /// <param name="cancellationToken">Canceled when Service Fabric needs to shut down this service replica.</param>
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
-            // TODO: Replace the following sample code with your own logic 
-            //       or remove this RunAsync override if it's not needed in your service.
-
-            var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-
-            while (true)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                using (var tx = this.StateManager.CreateTransaction())
+            await _repository.AddProduct(
+                new Product()
                 {
-                    var result = await myDictionary.TryGetValueAsync(tx, "Counter");
-
-                    ServiceEventSource.Current.ServiceMessage(this.Context, "Current Counter Value: {0}",
-                        result.HasValue ? result.Value.ToString() : "Value does not exist.");
-
-                    await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
-
-                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                    // discarded, and nothing is saved to the secondary replicas.
-                    await tx.CommitAsync();
+                    Id = Guid.NewGuid(),
+                    Name = "Dell XPS 1520",
+                    Description = "Powerfull laptop",
+                    Price = 1630,
+                    Availability = 10
                 }
+            );
 
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
-            }
+            await _repository.AddProduct(
+                new Product()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "WASD Keyboard",
+                    Description = "Mechanical Keyboard",
+                    Price = 150,
+                    Availability = 20
+                }
+            );
+
+            var prods = await _repository.GetAllProducts();
         }
     }
 }
