@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
+using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 using ServiceFabric.ECommerce.ProductCatalog.Model;
 
@@ -14,7 +15,7 @@ namespace ServiceFabric.ECommerce.ProductCatalog
     /// <summary>
     /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class ProductCatalog : StatefulService
+    internal sealed class ProductCatalog : StatefulService, IProductCatalogService
     {
         private readonly IProductRepository _repository;
 
@@ -33,7 +34,11 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            return new ServiceReplicaListener[0];
+            //return new ServiceReplicaListener[]
+            //{
+            //    new ServiceReplicaListener(context => this.CreateServiceRemotingListener(context)),
+            //};
+            return this.CreateServiceRemotingReplicaListeners();
         }
 
         /// <summary>
@@ -63,9 +68,17 @@ namespace ServiceFabric.ECommerce.ProductCatalog
                     Price = 150,
                     Availability = 20
                 }
-            );
+            );            
+        }
 
-            var prods = await _repository.GetAllProducts();
+        public async Task<IEnumerable<Product>> GetAllProducts()
+        {
+            return await _repository.GetAllProducts();
+        }
+
+        public async Task AddProduct(Product product)
+        {
+            await _repository.AddProduct(product);
         }
     }
 }
