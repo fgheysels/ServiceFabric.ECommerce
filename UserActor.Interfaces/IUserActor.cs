@@ -15,18 +15,11 @@ namespace UserActor.Interfaces
     /// Clients use this interface to interact with the actor that implements it.
     /// </summary>
     public interface IUserActor : IActor
-    {
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <returns></returns>
-        Task<int> GetCountAsync(CancellationToken cancellationToken);
+    {        
+        Task AddToCart(Guid productId, int quantity);
 
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        Task SetCountAsync(int count, CancellationToken cancellationToken);
+        Task<Dictionary<Guid, int>> GetCart();
+
+        Task ClearCart();
     }
 }

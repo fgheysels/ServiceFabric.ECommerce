@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
@@ -44,28 +45,36 @@ namespace UserActor
             // Any serializable object can be saved in the StateManager.
             // For more information, see https://aka.ms/servicefabricactorsstateserialization
 
-            return this.StateManager.TryAddStateAsync("count", 0);
+            return Task.CompletedTask;
         }
 
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <returns></returns>
-        Task<int> IUserActor.GetCountAsync(CancellationToken cancellationToken)
+        public async Task AddToCart(Guid productId, int quantity)
         {
-            return this.StateManager.GetStateAsync<int>("count", cancellationToken);
+            await StateManager.AddOrUpdateStateAsync(productId.ToString(), quantity, (id, oldQty) => oldQty + quantity);
         }
 
-        /// <summary>
-        /// TODO: Replace with your own actor method.
-        /// </summary>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        Task IUserActor.SetCountAsync(int count, CancellationToken cancellationToken)
+        public async Task<Dictionary<Guid, int>> GetCart()
         {
-            // Requests are not guaranteed to be processed in order nor at most once.
-            // The update function here verifies that the incoming count is greater than the current count to preserve order.
-            return this.StateManager.AddOrUpdateStateAsync("count", count, (key, value) => count > value ? count : value, cancellationToken);
+            var result = new Dictionary<Guid, int>();
+
+            var productIds = await StateManager.GetStateNamesAsync(CancellationToken.None);
+
+            foreach (string pId in productIds)
+            {
+                result.Add(new Guid(pId), await StateManager.GetStateAsync<int>(pId));
+            }
+
+            return result;
+        }
+
+        public async Task ClearCart()
+        {
+            var productIds = await StateManager.GetStateNamesAsync(CancellationToken.None);
+
+            foreach (string pId in productIds)
+            {
+                await StateManager.RemoveStateAsync(pId);
+            }
         }
     }
 }
