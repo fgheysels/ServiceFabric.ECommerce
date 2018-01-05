@@ -49,9 +49,9 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
             await _repository.AddProduct(
-                new Product()
+                new Product
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("E5B02550-E89E-4FBE-AC07-05D8E46FE0E2"),
                     Name = "Dell XPS 1520",
                     Description = "Powerfull laptop",
                     Price = 1630,
@@ -60,15 +60,15 @@ namespace ServiceFabric.ECommerce.ProductCatalog
             );
 
             await _repository.AddProduct(
-                new Product()
+                new Product
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("{85B85730-4091-44AC-886E-E60166B323AA}"),
                     Name = "WASD Keyboard",
                     Description = "Mechanical Keyboard",
                     Price = 150,
                     Availability = 20
                 }
-            );            
+            );
         }
 
         public async Task<IEnumerable<Product>> GetAllProducts()
