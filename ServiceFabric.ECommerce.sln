@@ -9,7 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.ProductCatalog.Model", "ServiceFabric.ECommerce.ProductCatalog.Model\ServiceFabric.ECommerce.ProductCatalog.Model.csproj", "{8E0C61E2-8BF3-47B2-BE13-8F5CCF60401D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFabric.ECommerce.API", "ServiceFabric.ECommerce.API\ServiceFabric.ECommerce.API.csproj", "{72F755A0-A410-4F3B-98A4-4909FA4D2402}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceFabric.ECommerce.API", "ServiceFabric.ECommerce.API\ServiceFabric.ECommerce.API.csproj", "{72F755A0-A410-4F3B-98A4-4909FA4D2402}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserActor", "UserActor\UserActor.csproj", "{87C91C58-29A7-4E9D-89E6-B0448730B250}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserActor.Interfaces", "UserActor.Interfaces\UserActor.Interfaces.csproj", "{4CA2FF73-66D7-4B15-8732-4773217E7BA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,18 @@ Global
 		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|x64.ActiveCfg = Release|Any CPU
 		{72F755A0-A410-4F3B-98A4-4909FA4D2402}.Release|x64.Build.0 = Release|Any CPU
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Debug|x64.ActiveCfg = Debug|x64
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Debug|x64.Build.0 = Debug|x64
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Release|Any CPU.ActiveCfg = Release|x64
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Release|x64.ActiveCfg = Release|x64
+		{87C91C58-29A7-4E9D-89E6-B0448730B250}.Release|x64.Build.0 = Release|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Debug|x64.ActiveCfg = Debug|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Debug|x64.Build.0 = Debug|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Release|Any CPU.ActiveCfg = Release|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Release|x64.ActiveCfg = Release|x64
+		{4CA2FF73-66D7-4B15-8732-4773217E7BA3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
