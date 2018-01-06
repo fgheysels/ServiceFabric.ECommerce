@@ -37,7 +37,7 @@ namespace ServiceFabric.ECommerce.ProductCatalog
                 {
                     while (await enumerator.MoveNextAsync(CancellationToken.None))
                     {
-                        list.Add(enumerator.Current.Value);                        
+                        list.Add(enumerator.Current.Value);
                     }
                 }
             }
@@ -53,6 +53,19 @@ namespace ServiceFabric.ECommerce.ProductCatalog
             {
                 await products.AddOrUpdateAsync(tx, product.Id, product, (id, value) => product);
                 await tx.CommitAsync();
+            }
+        }
+
+        public async Task<Product> GetProduct(Guid productId)
+        {
+            var products = await GetReliableProductsCollection();
+
+            using (var tx = _stateManager.CreateTransaction())
+            {
+                var product = await products.TryGetValueAsync(tx, productId);
+                await tx.CommitAsync();
+
+                return product.HasValue ? product.Value : null;
             }
         }
 

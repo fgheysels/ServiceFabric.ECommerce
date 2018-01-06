@@ -80,5 +80,10 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         {
             await _repository.AddProduct(product);
         }
+
+        public async Task<Product> GetProduct(Guid productId)
+        {
+            return await _repository.GetProduct(productId);
+        }
     }
 }
