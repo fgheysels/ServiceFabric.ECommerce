@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServiceFabric.ECommerce.API\ServiceFabric.ECommerce.API.csproj" />
+    <ProjectReference Include="..\ServiceFabric.ECommerce.CheckoutService\ServiceFabric.ECommerce.CheckoutService.csproj" />
     <ProjectReference Include="..\ServiceFabric.ECommerce.ProductCatalog\ServiceFabric.ECommerce.ProductCatalog.csproj" />
     <ProjectReference Include="..\UserActor\UserActor.csproj" />
   </ItemGroup>
