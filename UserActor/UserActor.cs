@@ -76,5 +76,27 @@ namespace UserActor
                 await StateManager.RemoveStateAsync(pId);
             }
         }
+
+        //public Task AddCheckoutInformationToHistory(CheckoutSummary checkoutSummary)
+        //{
+        //    return Task.CompletedTask;
+
+        //    //await StateManager.AddOrUpdateStateAsync("history",
+        //    //                                         new List<CheckoutSummary>() { checkoutSummary },
+        //    //                                         ((s, list) =>
+        //    //                                         {
+        //    //                                             list.Add(checkoutSummary);
+        //    //                                             return list;
+        //    //                                         }));
+        //}
+
+        //public async Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory()
+        //{
+        //    return Task.FromResult(new );
+
+        //    //var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
+
+        //    //return history.HasValue ? history.Value.ToArray() : new CheckoutSummary[] { };
+        //}
     }
 }

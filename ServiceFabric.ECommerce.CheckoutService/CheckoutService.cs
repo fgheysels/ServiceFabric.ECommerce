@@ -67,23 +67,11 @@ namespace ServiceFabric.ECommerce.CheckoutService
             }
 
             // Add the checkout to the history.
-            await AddCheckoutToHistory(result);
+            //await userActor.AddCheckoutInformationToHistory(result);            
 
             await userActor.ClearCart();
 
             return result;
-        }
-
-        private async Task AddCheckoutToHistory(CheckoutSummary summary)
-        {
-            // TODO: shouldn't we have the history of a user in the actor ?
-            var history = await StateManager.GetOrAddAsync<IReliableDictionary<DateTime, CheckoutSummary>>("history");
-
-            using (var tx = StateManager.CreateTransaction())
-            {
-                await history.AddAsync(tx, summary.Date, summary);
-                await tx.CommitAsync();
-            }
         }
 
         private static IUserActor GetUserActor(string userId)
@@ -98,7 +86,10 @@ namespace ServiceFabric.ECommerce.CheckoutService
 
         public async Task<IEnumerable<CheckoutSummary>> GetOrderHistory(string userId)
         {
-            throw new NotImplementedException();
+            //var userActor = GetUserActor(userId);
+            //return await userActor.GetCheckoutHistory();
+
+            return await Task.FromResult(new CheckoutSummary[] { });
         }
     }
 }

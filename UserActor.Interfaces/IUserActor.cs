@@ -21,5 +21,11 @@ namespace UserActor.Interfaces
         Task<Dictionary<Guid, int>> GetCart();
 
         Task ClearCart();
+
+        // TODO: CheckoutSummary is a class from CheckoutService.Model.
+        // It would be appropriate if the UserActor has its own CheckoutSummary class I think.        
+        //Task AddCheckoutInformationToHistory( CheckoutSummary checkoutSummary );
+
+        //Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory();
     }
 }
