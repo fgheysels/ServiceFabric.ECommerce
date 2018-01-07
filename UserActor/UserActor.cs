@@ -7,6 +7,7 @@ using System.Xml;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
 using Microsoft.ServiceFabric.Actors.Client;
+using ServiceFabric.ECommerce.CheckoutService.Model;
 using UserActor.Interfaces;
 
 namespace UserActor
@@ -71,32 +72,30 @@ namespace UserActor
         {
             var productIds = await StateManager.GetStateNamesAsync(CancellationToken.None);
 
+            productIds = productIds.Where(n => n != "history");
+
             foreach (string pId in productIds)
             {
                 await StateManager.RemoveStateAsync(pId);
             }
         }
 
-        //public Task AddCheckoutInformationToHistory(CheckoutSummary checkoutSummary)
-        //{
-        //    return Task.CompletedTask;
+        public async Task AddCheckoutInformationToHistory(CheckoutSummary checkoutSummary)
+        {
+            await StateManager.AddOrUpdateStateAsync("history",
+                                                     new List<CheckoutSummary>() { checkoutSummary },
+                                                     ((s, list) =>
+                                                     {
+                                                         list.Add(checkoutSummary);
+                                                         return list;
+                                                     }));
+        }
 
-        //    //await StateManager.AddOrUpdateStateAsync("history",
-        //    //                                         new List<CheckoutSummary>() { checkoutSummary },
-        //    //                                         ((s, list) =>
-        //    //                                         {
-        //    //                                             list.Add(checkoutSummary);
-        //    //                                             return list;
-        //    //                                         }));
-        //}
+        public async Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory()
+        {           
+           var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
 
-        //public async Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory()
-        //{
-        //    return Task.FromResult(new );
-
-        //    //var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
-
-        //    //return history.HasValue ? history.Value.ToArray() : new CheckoutSummary[] { };
-        //}
+           return history.HasValue ? history.Value.ToArray() : new CheckoutSummary[] { };
+        }
     }
 }

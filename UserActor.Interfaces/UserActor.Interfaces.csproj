@@ -96,6 +96,12 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceFabric.ECommerce.CheckoutService.Model\ServiceFabric.ECommerce.CheckoutService.Model.csproj">
+      <Project>{3a6c4194-0a17-4046-96c5-9ac4e23af29a}</Project>
+      <Name>ServiceFabric.ECommerce.CheckoutService.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.ServiceFabric.Actors.2.8.232\build\Microsoft.ServiceFabric.Actors.targets" Condition="Exists('..\packages\Microsoft.ServiceFabric.Actors.2.8.232\build\Microsoft.ServiceFabric.Actors.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

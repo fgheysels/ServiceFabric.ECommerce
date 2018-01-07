@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Remoting.FabricTransport;
 using Microsoft.ServiceFabric.Services.Remoting;
+using ServiceFabric.ECommerce.CheckoutService.Model;
 
 [assembly: FabricTransportActorRemotingProvider(RemotingListener = RemotingListener.V2Listener, RemotingClient = RemotingClient.V2Client)]
 namespace UserActor.Interfaces
@@ -24,8 +25,8 @@ namespace UserActor.Interfaces
 
         // TODO: CheckoutSummary is a class from CheckoutService.Model.
         // It would be appropriate if the UserActor has its own CheckoutSummary class I think.        
-        //Task AddCheckoutInformationToHistory( CheckoutSummary checkoutSummary );
+        Task AddCheckoutInformationToHistory( CheckoutSummary checkoutSummary );
 
-        //Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory();
+        Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory();
     }
 }

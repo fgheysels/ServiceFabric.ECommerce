@@ -109,6 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceFabric.ECommerce.CheckoutService.Model\ServiceFabric.ECommerce.CheckoutService.Model.csproj">
+      <Project>{3a6c4194-0a17-4046-96c5-9ac4e23af29a}</Project>
+      <Name>ServiceFabric.ECommerce.CheckoutService.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserActor.Interfaces\UserActor.Interfaces.csproj">
       <Project>{4CA2FF73-66D7-4B15-8732-4773217E7BA3}</Project>
       <Name>UserActor.Interfaces</Name>

@@ -67,7 +67,7 @@ namespace ServiceFabric.ECommerce.CheckoutService
             }
 
             // Add the checkout to the history.
-            //await userActor.AddCheckoutInformationToHistory(result);            
+            await userActor.AddCheckoutInformationToHistory(result);            
 
             await userActor.ClearCart();
 
@@ -76,20 +76,18 @@ namespace ServiceFabric.ECommerce.CheckoutService
 
         private static IUserActor GetUserActor(string userId)
         {
-            return ActorProxy.Create<IUserActor>(new ActorId(userId), new Uri("fabric:/ServiceFabric.ECommerce/ServiceFabric.ECommerce.UserActorService"));
+            return ActorProxy.Create<IUserActor>(new ActorId(userId), new Uri("fabric:/ServiceFabric.ECommerce/UserActorService"));
         }
 
         private static IProductCatalogService GetProductCatalogService()
         {
-            return ServiceProxy.Create<IProductCatalogService>(new Uri("fabric:/ServiceFabric.ECommerce/ServiceFabric.ECommerce.ProductCatalogService"), new ServicePartitionKey(0));
+            return ServiceProxy.Create<IProductCatalogService>(new Uri("fabric:/ServiceFabric.ECommerce/ServiceFabric.ECommerce.ProductCatalog"), new ServicePartitionKey(0));
         }
 
         public async Task<IEnumerable<CheckoutSummary>> GetOrderHistory(string userId)
         {
-            //var userActor = GetUserActor(userId);
-            //return await userActor.GetCheckoutHistory();
-
-            return await Task.FromResult(new CheckoutSummary[] { });
+            var userActor = GetUserActor(userId);
+            return await userActor.GetCheckoutHistory();
         }
     }
 }
