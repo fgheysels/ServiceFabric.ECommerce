@@ -31,7 +31,7 @@ namespace ServiceFabric.ECommerce.API.Controllers
 
         private static ICheckoutService GetCheckoutService()
         {
-            return ServiceProxy.Create<ICheckoutService>(new Uri("fabric:/ServiceFabric.EComerce/ServiceFabric.ECommerce.CheckoutService"),
+            return ServiceProxy.Create<ICheckoutService>(new Uri("fabric:/ServiceFabric.ECommerce/ServiceFabric.ECommerce.CheckoutService"),
                                                          new ServicePartitionKey(0));
         }
 
