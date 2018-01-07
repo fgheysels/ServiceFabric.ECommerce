@@ -21,7 +21,7 @@ namespace ServiceFabric.ECommerce.API.Controllers
             return new CheckoutSummary(summary);
         }
 
-        [Route("history/{userId")]
+        [Route("history/{userId}")]
         public async Task<IEnumerable<CheckoutSummary>> GetHistory(string userId)
         {
             var history = await GetCheckoutService().GetOrderHistory(userId);
