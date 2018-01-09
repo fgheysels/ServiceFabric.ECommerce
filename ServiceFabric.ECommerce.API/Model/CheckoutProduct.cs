@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -31,28 +29,5 @@ namespace ServiceFabric.ECommerce.API.Model
             this.Quantity = product.Quantity;
             this.Price = product.Price;
         }
-    }
-
-    public class CheckoutSummary
-    {
-        [JsonProperty("products")]
-        public List<CheckoutProduct> Products { get; set; }
-
-        [JsonProperty("totalprice")]
-        public decimal TotalPrice { get; set; }
-
-        [JsonProperty("date")]
-        public DateTime Date { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CheckoutSummary"/> class.
-        /// </summary>
-        public CheckoutSummary ( CheckoutService.Model.CheckoutSummary summary)
-        {
-            this.TotalPrice = summary.TotalPrice;
-            this.Date = summary.Date;
-            Products = new List<CheckoutProduct>(summary.Products.Select(p => new CheckoutProduct(p)));
-        }
-
     }
 }
