@@ -27,6 +27,6 @@ namespace UserActor.Interfaces
         // It would be appropriate if the UserActor has its own CheckoutSummary class I think.        
         Task AddCheckoutInformationToHistory( CheckoutSummary checkoutSummary );
 
-        Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory();
+        Task<List<CheckoutSummary>> GetCheckoutHistory();
     }
 }

@@ -60,6 +60,8 @@ namespace UserActor
 
             var productIds = await StateManager.GetStateNamesAsync(CancellationToken.None);
 
+            productIds = productIds.Where(n => n != "history");
+
             foreach (string pId in productIds)
             {
                 result.Add(new Guid(pId), await StateManager.GetStateAsync<int>(pId));
@@ -91,11 +93,11 @@ namespace UserActor
                                                      }));
         }
 
-        public async Task<IEnumerable<CheckoutSummary>> GetCheckoutHistory()
+        public async Task<List<CheckoutSummary>> GetCheckoutHistory()
         {           
            var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
 
-           return history.HasValue ? history.Value.ToArray() : new CheckoutSummary[] { };
+           return history.HasValue ? history.Value : new List<CheckoutSummary>() { };
         }
     }
 }
