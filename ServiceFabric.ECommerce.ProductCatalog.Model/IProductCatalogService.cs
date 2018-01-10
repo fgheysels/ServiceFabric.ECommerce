@@ -12,5 +12,7 @@ namespace ServiceFabric.ECommerce.ProductCatalog.Model
         Task AddProduct(Product product);
 
         Task<Product> GetProduct(Guid productId);
+
+        Task<IDictionary<Guid, Product>> GetProducts(IEnumerable<Guid> productIds);
     }
 }

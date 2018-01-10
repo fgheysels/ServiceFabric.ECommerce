@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml;
 using Microsoft.ServiceFabric.Actors;
 using Microsoft.ServiceFabric.Actors.Runtime;
-using Microsoft.ServiceFabric.Actors.Client;
 using ServiceFabric.ECommerce.CheckoutService.Model;
 using UserActor.Interfaces;
 
@@ -94,10 +92,10 @@ namespace UserActor
         }
 
         public async Task<List<CheckoutSummary>> GetCheckoutHistory()
-        {           
-           var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
+        {
+            var history = await StateManager.TryGetStateAsync<List<CheckoutSummary>>("history");
 
-           return history.HasValue ? history.Value : new List<CheckoutSummary>() { };
+            return history.HasValue ? history.Value : new List<CheckoutSummary>();
         }
     }
 }

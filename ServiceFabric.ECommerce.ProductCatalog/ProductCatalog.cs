@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Fabric;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
@@ -34,10 +32,6 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         /// <returns>A collection of listeners.</returns>
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            //return new ServiceReplicaListener[]
-            //{
-            //    new ServiceReplicaListener(context => this.CreateServiceRemotingListener(context)),
-            //};
             return this.CreateServiceRemotingReplicaListeners();
         }
 
@@ -84,6 +78,26 @@ namespace ServiceFabric.ECommerce.ProductCatalog
         public async Task<Product> GetProduct(Guid productId)
         {
             return await _repository.GetProduct(productId);
+        }
+
+        public async Task<IDictionary<Guid, Product>> GetProducts(IEnumerable<Guid> productIds)
+        {
+            var result = new Dictionary<Guid, Product>();
+
+            // Take advantage of the existing repository; however this might not be
+            // the best solution since we're starting a transaction for each retrieval
+            // inside the repository.  I think it might be better to refactor this.
+            foreach (var productId in productIds)
+            {
+                var product = await _repository.GetProduct(productId);
+
+                if (product != null)
+                {
+                    result.Add(productId, product);
+                }
+            }
+
+            return result;
         }
     }
 }

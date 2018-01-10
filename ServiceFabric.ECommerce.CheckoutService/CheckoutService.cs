@@ -51,10 +51,17 @@ namespace ServiceFabric.ECommerce.CheckoutService
 
             var catalogService = GetProductCatalogService();
 
-            // TODO:this is a chatty interface; create a chunky method.
+            // Retrieve all product information in one call.
+            var productInformation = await catalogService.GetProducts(cartContent.Keys);
+
             foreach (var item in cartContent)
             {
-                var product = await catalogService.GetProduct(item.Key);
+                if (productInformation.ContainsKey(item.Key) == false)
+                {
+                    continue;
+                }
+
+                var product = productInformation[item.Key];
 
                 var checkoutProduct = new CheckoutProduct()
                 {
